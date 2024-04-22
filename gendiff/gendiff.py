@@ -5,7 +5,7 @@ def iter_list(key, list, par):
     res = ""
     for item in list:
         if key == item[0]:
-            res += par + item[0] + ": " + str(item[1]) + "\n"
+            res += par + item[0] + ": " + str(item[1]).lower() + "\n"
     return res
 
 
