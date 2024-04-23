@@ -6,5 +6,3 @@ right_ans = ('{\n'
             ' + timeout: 20\n'
             ' + verbose: true\n'
           '}')
-
-print (right_ans)

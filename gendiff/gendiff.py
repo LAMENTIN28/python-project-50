@@ -5,7 +5,7 @@ def iter_list(key, list, par):
     res = ""
     for item in list:
         if key == item[0]:
-            res += par + item[0] + ": " + str(item[1]).lower() + "\n"
+            res += par + item[0] + ": " + (str(item[1])).lower() + "\n"
     return res
 
 
@@ -24,8 +24,4 @@ def generate_diff(path_file1, path_file2):
         res1 += iter_list(key, unique1, " - ")
         res1 += iter_list(key, unique2, " + ")
     res1 = '{\n' + res1 + '}'
-    print(res1)
     return res1
-
-
-generate_diff('gendiff/files/file1.json', 'gendiff/files/file2.json')
