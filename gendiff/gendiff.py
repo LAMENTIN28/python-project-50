@@ -5,11 +5,11 @@ def iter_list(key, list, par):
     res = ""
     for item in list:
         if key == item[0]:
-            res += par + str(item[0]) + ": " + str(item[1]) + "\n"
+            res += par + str(item[0]) + ": " + (str(item[1])).lower() + "\n"
     return res
 
 
-def generate_diff(path_file1, path_file2):
+def gen_diff(path_file1, path_file2):
     file1 = json.load(open(path_file1))
     file2 = json.load(open(path_file2))
     all2 = []
