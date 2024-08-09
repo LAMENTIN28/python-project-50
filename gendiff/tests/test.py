@@ -1,6 +1,6 @@
-from gendiff.gendiff import generate_diff
 from gendiff.gendiff_yaml import generate_diff_yaml
-from fixtures.right_ans1 import right_ans
+from gendiff.gendiff import generate_diff
+from gendiff.tests.fixtures.right_ans import right_ans
 
 
 
