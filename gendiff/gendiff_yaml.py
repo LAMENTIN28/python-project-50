@@ -9,7 +9,7 @@ def generate_diff_yaml(path_file1, path_file2):
     prel = []
     prime_file = dict(sorted(prime_file.items()))
     for k1, v1 in prime_file.items():
-            if k1 in second_file.keys() and v1 in second_file.values():
+            if k1 in second_file.keys() and (v1 in second_file.values()):
                 prel.append(f'   {k1}: {v1}')
             elif k1 in second_file.keys() and v1 not in second_file.values():
                 prel.append(f' - {k1}: {v1}')
@@ -26,4 +26,3 @@ def generate_diff_yaml(path_file1, path_file2):
         res += f'{k}\n'
     res = res.lower() + '}'
     return res
-            
