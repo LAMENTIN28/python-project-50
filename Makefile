@@ -15,3 +15,7 @@ lint:
 
 test:
 	python3 gendiff/tests/test.py
+
+
+test-coverage:
+	coverage xml
