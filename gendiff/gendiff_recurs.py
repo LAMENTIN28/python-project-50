@@ -26,38 +26,35 @@ def build_diff(dict1, dict2):
     return diff
 
 def render_stylish(diff, depth=1):
-    indent = " " * (depth * 2 + 3)  # Ширина отступов
+    indent = " " * (depth * 2 + 2)  
     lines = []
     for key, value in diff.items():
         status = value["status"]
         if status == "removed":
-            lines.append(f"{' ' * (depth * 2)}- {key}: {format_value(value['value'], depth)}")
+            lines.append(f"{' ' * (depth * 2+1)}- {key}: {format_value(value['value'], depth)}")
         elif status == "added":
-            lines.append(f"{' ' * (depth * 2)}+ {key}: {format_value(value['value'], depth)}")
+            lines.append(f"{' ' * (depth * 2+1)}+ {key}: {format_value(value['value'], depth)}")
         elif status == "unchanged":
-            lines.append(f"{' ' * (depth * 2)}  {key}: {format_value(value['value'], depth)}")
+            lines.append(f"{' ' * (depth * 2+1)}  {key}: {format_value(value['value'], depth)}")
         elif status == "changed":
-            lines.append(f"{' ' * (depth * 2)}- {key}: {format_value(value['old_value'], depth)}")
-            lines.append(f"{' ' * (depth * 2)}+ {key}: {format_value(value['new_value'], depth)}")
+            lines.append(f"{' ' * (depth * 2+1)}- {key}: {format_value(value['old_value'], depth)}")
+            lines.append(f"{' ' * (depth * 2+1)}+ {key}: {format_value(value['new_value'], depth)}")
         elif status == "nested":
-            lines.append(f"{' ' * (depth * 2)}{key}: {{")
-            lines.append(render_stylish(value["children"], depth + 1))
-            lines.append(f"{' ' * (depth * 2)}}}")
+            lines.append(f"{' ' * (depth * 2+1)}{key}: {{")
+            lines.append(render_stylish(value["children"], depth+1))
+            lines.append(f"{' ' * (depth * 2+1)}}}")
     return "\n".join(lines)
 
 def format_value(value, depth):
-    indent = " " * (depth * 2 + 4)  # Ширина отступов
+    indent = " " * (depth * 2 + 4) 
     if isinstance(value, dict):
         lines = ["{"]
         for k, v in value.items():
             lines.append(f"{indent}{k}: {format_value(v, depth + 1)}")
-        lines.append(f"{' ' * (depth * 2)}  }}")  # Закрывающая скобка
+        lines.append(f"{' ' * (depth * 2 - 1)}  }}") 
         return "\n".join(lines)
     elif isinstance(value, bool):
         return "true" if value else "false"
     elif value is None:
         return "null"
     return str(value)
-
-# Пример использования
-print(generate_diff_recurs('gendiff/files/file1_rec.json', 'gendiff/files/file2_rec.json'))

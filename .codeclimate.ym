@@ -1,0 +1,4 @@
+test_reporter:
+  coverage:
+    command: coverage xml
+    reporter_id: 9a372163ee5ab6078a14189d84f6644b34f43927358678791739ab3b64ad6c6b
