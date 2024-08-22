@@ -1,6 +1,11 @@
 import json
 
 
+STATUSES = {'removed': '- ',
+            'added': '+ ',
+            'unchanged': '  '}
+
+
 def generate_diff_recurs(path_file1, path_file2):
     with open(path_file1) as f1, open(path_file2) as f2:
         file1 = json.load(f1)
@@ -29,21 +34,19 @@ def build_diff(dict1, dict2):
 
 def render_stylish(diff, depth=1):
     lines = []
+    absatz = depth * 2 + 1
     for key, value in diff.items():
         status = value["status"]
-        if status == "removed":
-            lines.append(f"{' ' * (depth * 2+1)}- {key}: {format_value(value['value'], depth)}")
-        elif status == "added":
-            lines.append(f"{' ' * (depth * 2+1)}+ {key}: {format_value(value['value'], depth)}")
-        elif status == "unchanged":
-            lines.append(f"{' ' * (depth * 2+1)}  {key}: {format_value(value['value'], depth)}")
-        elif status == "changed":
-            lines.append(f"{' ' * (depth * 2+1)}- {key}: {format_value(value['old_value'], depth)}")
-            lines.append(f"{' ' * (depth * 2+1)}+ {key}: {format_value(value['new_value'], depth)}")
+        for type, sign in STATUSES.items():
+            if status == type:
+                lines.append(f"{' ' * (absatz)}{sign}{key}: {format_value(value['value'], depth)}")
+        if status == "changed":
+            lines.append(f"{' ' * (absatz)}- {key}: {format_value(value['old_value'], depth)}")
+            lines.append(f"{' ' * (absatz)}+ {key}: {format_value(value['new_value'], depth)}")
         elif status == "nested":
-            lines.append(f"{' ' * (depth * 2+1)}{key}: {{")
+            lines.append(f"{' ' * (absatz)}{key}: {{")
             lines.append(render_stylish(value["children"], depth + 1))
-            lines.append(f"{' ' * (depth * 2+1)}}}")
+            lines.append(f"{' ' * (absatz)}}}")
     return "\n".join(lines)
 
 
