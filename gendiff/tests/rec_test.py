@@ -17,10 +17,6 @@ def test_right_yaml():
 
 
 def test_right_recurs_json():
-    print(right_ans_rec)
-    res = generate_diff_recurs('gendiff/files/file1_rec.json',
-                                'gendiff/files/file2_rec.json')
-    print(res)
     assert generate_diff_recurs('gendiff/files/file1_rec.json',
                                 'gendiff/files/file2_rec.json') == right_ans_rec
     print('third test passed')
