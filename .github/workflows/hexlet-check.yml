@@ -45,4 +45,6 @@ jobs:
       - name: Upload coverage to Code Climate
         env:
           CC_TEST_REPORTER_ID: 9a372163ee5ab6078a14189d84f6644b34f43927358678791739ab3b64ad6c6b
-        run: codeclimate-test-reporter
+        run: curl -L https://codeclimate.com/test_reports \
+          -F 'report=@coverage.xml' \
+          -F 'token=9a372163ee5ab6078a14189d84f6644b34f43927358678791739ab3b64ad6c6b'
