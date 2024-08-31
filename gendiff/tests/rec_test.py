@@ -4,6 +4,8 @@ from gendiff.gendiff_recurs import generate_diff_recurs
 from gendiff.gendiff_recurs_yaml import generate_diff_recurs_yaml
 from gendiff.tests.fixtures.right_ans import right_ans
 from gendiff.tests.fixtures.right_ans_recurs import right_ans_rec
+from gendiff.plain import generate_diff_plain
+from gendiff.tests.fixtures.right_ans_plain import right_ans_plain
 
 
 def test_right_json():
@@ -28,7 +30,17 @@ def test_right_recurs_yaml():
     print('fourth test passed')
 
 
+def test_right_plain():
+    assert generate_diff_plain('gendiff/files/file1_rec.json',
+                               'gendiff/files/file2_rec.json', 'plain') == right_ans_plain
+    print('fifth test passed')
+    assert generate_diff_plain('gendiff/files/file1_rec.json',
+                               'gendiff/files/file2_rec.json') is None
+    print('sixth test passed')
+
+
 test_right_json()
 test_right_yaml()
 test_right_recurs_json()
 test_right_recurs_yaml()
+test_right_plain()
