@@ -46,6 +46,6 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: 9a372163ee5ab6078a14189d84f6644b34f43927358678791739ab3b64ad6c6b
         run: |
-          curl -L -X POST https://codeclimate.com/test_reports \
+          curl -L -X POST https://codeclimate.com/repos/6626923c06d5ba281f0d67f2/settings/test_reporter \
           -F 'report=@coverage.xml' \
           -F 'token=9a372163ee5ab6078a14189d84f6644b34f43927358678791739ab3b64ad6c6b'
