@@ -36,16 +36,22 @@ jobs:
           pip install coverage  
           pip install pytest
           pip install pyyaml
-          coverage run -m pytest
-          coverage xml
+          poetry run coverage run -m pytest
+          poetry run coverage xml -o coverage.xml
 
       - name: Install Code Climate Test Reporter
         run: pip install codeclimate-test-reporter
+
+      - name: Check if coverage.xml exists
+        run: ls -l coverage.xml
+
+      - name: Display coverage report
+        run: cat coverage.xml
 
       - name: Upload coverage to Code Climate
         env:
           CC_TEST_REPORTER_ID: 9a372163ee5ab6078a14189d84f6644b34f43927358678791739ab3b64ad6c6b
         run: |
-          curl -L -X POST https://codeclimate.com/repos/6626923c06d5ba281f0d67f2/settings/test_reporter \
+          curl -L https://codeclimate.com/test_reports \
           -F 'report=@coverage.xml' \
-          -F 'token=9a372163ee5ab6078a14189d84f6644b34f43927358678791739ab3b64ad6c6b'
+          -F 'token=${{ secrets.CC_TEST_REPORTER_ID }}'
