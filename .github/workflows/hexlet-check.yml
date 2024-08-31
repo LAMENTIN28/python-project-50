@@ -32,8 +32,7 @@ jobs:
         run: make lint
 
       - name: Run tests with coverage
-        run: |
-          pip install coverage  
+        run: | 
           pip install pytest
           pip install pyyaml
           poetry run coverage run -m pytest
@@ -51,10 +50,11 @@ jobs:
       - name: Dispplay HTML
         run: coverage html
 
-      - name: Upload coverage to Code Climate
+      - name: Update coverage reports
+        run: pip install coverage 
+      - uses: paambaati/codeclimate-action@v2.2.4
         env:
-          CC_TEST_REPORTER_ID: 9a372163ee5ab6078a14189d84f6644b34f43927358678791739ab3b64ad6c6b
-        run: |
-          curl -L https://codeclimate.com/test_reports \
-          -F 'report=@htmlcov/index.html ' \
-          -F 'token=9a372163ee5ab6078a14189d84f6644b34f43927358678791739ab3b64ad6c6b'
+          CC_TEST_REPORTER_ID: 9a372163ee5ab6078a14189d84f6644b34f43927358678791739ab3b64ad6c6b'
+        with:
+          coverageCommand: yarn coverage
+          
