@@ -34,6 +34,7 @@ jobs:
       - name: Run tests with coverage
         run: |
           pip install coverage  
+          pip install pytest
           coverage run -m pytest
           coverage xml
 
