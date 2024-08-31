@@ -47,7 +47,9 @@ jobs:
 
       - name: Display coverage report
         run: cat coverage.xml
-             coverage html
+            
+      - name: Dispplay HTML
+        run: coverage html
 
       - name: Upload coverage to Code Climate
         env:
