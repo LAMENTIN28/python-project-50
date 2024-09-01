@@ -6,55 +6,19 @@
 name: hexlet-check
 
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - '**'
+    tags:
+      - '**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.*]
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+      - name: Hexlet project check
+        uses: hexlet/project-action@release
         with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install dependencies
-        run: |
-          pip install poetry
-          make install
-
-      - name: Run linter
-        run: make lint
-
-      - name: Run tests with coverage
-        run: | 
-          pip install pytest
-          pip install pyyaml
-          poetry run coverage run -m pytest
-          poetry run coverage xml -o coverage.xml
-
-      - name: Install Code Climate Test Reporter
-        run: pip install codeclimate-test-reporter
-
-      - name: Check if coverage.xml exists
-        run: ls -l coverage.xml
-
-      - name: Display coverage report
-        run: cat coverage.xml
-            
-      #- name: Dispplay HTML
-      #  run: coverage html
-
-      #- name: Update coverage reports
-      #  run: pip install coverage 
-      #- uses: paambaati/codeclimate-action@v2.2.4
-      #  env:
-      #    CC_TEST_REPORTER_ID: 9a372163ee5ab6078a14189d84f6644b34f43927358678791739ab3b64ad6c6b'
-      #  with:
-      #    coverageCommand: yarn coverage
-          
+          hexlet-id: ${{ secrets.HEXLET_ID }}
