@@ -1,4 +1,4 @@
-from gendiff.gendiff_yaml import generate_diff_yaml
+from gendiff.recurs_for_yaml import generate_diff_yaml
 from gendiff.gendiff import generate_diff
 from gendiff.gendiff_recurs import generate_diff_recurs
 from gendiff.gendiff_recurs_yaml import generate_diff_recurs_yaml
