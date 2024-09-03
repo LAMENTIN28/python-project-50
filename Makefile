@@ -14,7 +14,7 @@ lint:
 	poetry run flake8 gendiff
 
 test:
-	python3 gendiff/tests/test.py
+	python3 gendiff/tests/rec_test.py
 
 
 test-coverage:

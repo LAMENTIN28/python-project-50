@@ -1,5 +1,5 @@
 import json
-from gendiff.gendiff_recurs import build_diff
+from gendiff.recurs_for_json import build_diff
 
 
 def generate_diff_plain(path_file1, path_file2, format=''):

@@ -1,5 +1,5 @@
 import yaml
-from gendiff.gendiff_recurs import build_diff, render_stylish
+from gendiff.recurs_for_json import build_diff, render_stylish
 
 
 def generate_diff_recurs_yaml(path_file1, path_file2):
